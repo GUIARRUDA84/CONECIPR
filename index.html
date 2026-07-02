@@ -1,0 +1,380 @@
+<!--
+  ============================================================
+  PROTOCOLO DE INTENÇÕES DIGITAL — CONECI-PR  (v2)
+  Página única e autossuficiente. As adesões são gravadas num GOOGLE FORMS.
+  Compartilhável por link no WhatsApp. Hospedagem estática (GitHub Pages / Vercel).
+  ------------------------------------------------------------
+  >>> ANTES DE PUBLICAR, EDITE O BLOCO "CONFIG" NO <script> (instruções no README) <<<
+  ============================================================
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protocolo de Intenções · CONECI-PR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#14212B; --navy:#0E3A5A; --azul:#1E6CA8; --azul2:#2F86C6;
+    --verde:#3F9D53; --verde-d:#2F7E41; --verde-bg:#EAF6EE;
+    --papel:#EEF3F8; --card:#FFFFFF; --linha:#DDE6EF; --musgo:#5B6B79;
+    --sombra:0 1px 2px rgba(14,58,90,.06), 0 8px 30px rgba(14,58,90,.08);
+    --r:14px;
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);background:var(--papel);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px 180px}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:30px 22px 34px;
+    background:linear-gradient(160deg,#0E3A5A 0%,#154C77 55%,#1E6CA8 100%);border-radius:0 0 26px 26px;box-shadow:var(--sombra)}
+  .hero .ring{position:absolute;width:230px;height:230px;border-radius:50%;border:1.5px solid rgba(255,255,255,.16);top:-70px;right:-60px}
+  .hero .ring.two{width:120px;height:120px;bottom:-30px;left:-30px;top:auto;right:auto;border-color:rgba(120,200,140,.28)}
+  .hero .node{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--verde);top:24px;right:64px;box-shadow:0 0 0 4px rgba(63,157,83,.25)}
+  .eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:#BFE0F5;margin:0 0 10px}
+  .mark{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:2.35rem;line-height:1.02;letter-spacing:-.01em;margin:0}
+  .mark span{color:#8FD49E}
+  .hero h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.12rem;margin:14px 0 0;color:#EAF4FC}
+  .hero p.sub{margin:8px auto 0;max-width:44ch;font-size:.92rem;color:#CFE3F2}
+  .selo{display:inline-block;margin-top:16px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);font-size:.78rem;font-weight:600;letter-spacing:.04em}
+
+  .card{background:var(--card);border:1px solid var(--linha);border-radius:var(--r);box-shadow:var(--sombra);padding:22px 20px;margin-top:18px}
+  .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--azul);font-weight:700;margin:0 0 6px}
+  h2.sec{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.3rem;margin:0 0 4px;color:var(--navy)}
+
+  .decls{list-style:none;margin:14px 0 0;padding:0;counter-reset:d}
+  .decls li{position:relative;padding:14px 4px 14px 52px;border-top:1px solid var(--linha)}
+  .decls li:first-child{border-top:0}
+  .decls li::before{counter-increment:d;content:counter(d);position:absolute;left:8px;top:14px;width:30px;height:30px;
+    border-radius:9px;background:var(--navy);color:#fff;font-weight:700;font-size:.92rem;display:grid;place-items:center}
+  .decls b{color:var(--navy)}
+  .nota{margin:16px 0 0;padding:12px 14px;background:#F3F7FB;border-left:3px solid var(--azul2);border-radius:8px;font-size:.86rem;color:var(--musgo)}
+
+  .field{margin-top:14px}
+  label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin:0 0 6px}
+  .req{color:#C0492B}
+  input,select{width:100%;font:inherit;color:var(--ink);background:#FBFDFF;border:1.5px solid var(--linha);border-radius:10px;padding:12px 13px;transition:border-color .15s,box-shadow .15s}
+  input:focus,select:focus{outline:none;border-color:var(--azul2);box-shadow:0 0 0 3px rgba(47,134,198,.18)}
+  input.err,select.err{border-color:#C0492B;box-shadow:0 0 0 3px rgba(192,73,43,.14)}
+  .row{display:grid;gap:12px}
+  @media(min-width:520px){.row.two{grid-template-columns:1fr 1fr}}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+  .seg button{font:inherit;font-weight:600;cursor:pointer;padding:12px;border-radius:10px;border:1.5px solid var(--linha);background:#FBFDFF;color:var(--musgo);transition:.15s}
+  .seg button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+
+  /* EQUIPE FUNDADORA */
+  .founder{margin-top:18px;border:1.5px solid #BFE3C8;background:var(--verde-bg);border-radius:var(--r);padding:16px 16px 4px}
+  .founder .top{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+  .founder .chk{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid var(--verde);background:#fff;display:grid;place-items:center;margin-top:2px;transition:.15s}
+  .founder .chk svg{width:15px;height:15px;opacity:0;transform:scale(.5);transition:.15s;color:#fff}
+  .founder.on .chk{background:var(--verde);border-color:var(--verde)}
+  .founder.on .chk svg{opacity:1;transform:scale(1)}
+  .founder .tt{font-weight:700;color:var(--verde-d);font-size:1.02rem;margin:0}
+  .founder .ds{margin:3px 0 0;font-size:.86rem;color:#3B5A44}
+  .founder .reveal{max-height:0;overflow:hidden;transition:max-height .35s ease;margin-top:0}
+  .founder.on .reveal{max-height:340px;margin-top:14px}
+  .founder .rl{font-size:.8rem;font-weight:600;color:var(--verde-d);margin:0 0 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:14px}
+  .chips button{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;padding:8px 12px;border-radius:999px;border:1.5px solid #BFE3C8;background:#fff;color:var(--verde-d);transition:.12s}
+  .chips button[aria-pressed="true"]{background:var(--verde);border-color:var(--verde);color:#fff}
+
+  /* TERMO */
+  .termo{margin-top:18px;background:#FBFCFE;border:1px dashed #C7D6E4;border-radius:12px;padding:18px 18px 16px;position:relative}
+  .termo .tt{font-family:"Fraunces",serif;font-weight:600;color:var(--navy);font-size:1.02rem;margin:0 0 8px;text-align:center}
+  .termo .body{font-size:.9rem;color:#2A3A47}
+  .termo dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:12px 0 0;font-size:.88rem}
+  .termo dt{color:var(--musgo);font-weight:600}
+  .termo dd{margin:0;font-weight:600;color:var(--ink)}
+  .termo dd:empty::after{content:"—";color:#B7C4D1;font-weight:400}
+  .termo dd.f{color:var(--verde-d)}
+  .stamp{position:absolute;right:14px;bottom:12px;width:96px;height:96px;border-radius:50%;border:2.5px solid var(--verde);
+    color:var(--verde-d);display:grid;place-items:center;text-align:center;font-weight:700;font-size:.62rem;letter-spacing:.08em;line-height:1.25;
+    transform:rotate(-11deg) scale(.4);opacity:0;transition:transform .5s cubic-bezier(.2,1.4,.4,1),opacity .4s;text-transform:uppercase}
+  .stamp.on{opacity:1;transform:rotate(-11deg) scale(1)}
+
+  /* AÇÕES */
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(238,243,248,0),var(--papel) 34%)}
+  .actions-in{max-width:680px;margin:0 auto;display:grid;gap:10px}
+  .btn{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:12px;padding:15px 18px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;transition:transform .08s,filter .15s}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--navy);color:#fff}
+  .btn.primary.founder-mode{background:var(--verde);color:#06301A}
+  .btn.primary:hover{filter:brightness(1.05)}
+  .btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--linha)}
+  .btn.zap{background:#25D366;color:#06301A}
+  .btn svg{width:20px;height:20px;flex:none}
+  .hint{text-align:center;font-size:.76rem;color:var(--musgo);margin:2px 0 0}
+
+  /* SUCESSO */
+  .ok{display:none;text-align:center;padding:8px 4px}
+  .ok.show{display:block}
+  .ok .mk{width:64px;height:64px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;margin:0 auto 12px}
+  .ok .mk svg{width:32px;height:32px}
+  .ok h3{font-family:"Fraunces",serif;color:var(--navy);margin:0 0 4px}
+  .ok p{margin:0 0 14px;color:var(--musgo);font-size:.9rem}
+
+  footer{text-align:center;color:var(--musgo);font-size:.78rem;margin-top:26px;padding:0 6px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="hero">
+  <div class="ring"></div><div class="ring two"></div><div class="node"></div>
+  <p class="eyebrow">Rede Estadual de Controle Interno</p>
+  <p class="mark">Con<span>eci</span>-PR</p>
+  <h1>Protocolo de Intenções nº 001/2026</h1>
+  <p class="sub">Um pacto de cooperação para criar o Conselho Estadual de Controle Interno do Paraná.</p>
+  <span class="selo">Adesão voluntária · sem custo · sem anuidade em 2026–2027</span>
+</div>
+
+<div class="wrap">
+
+  <section class="card">
+    <p class="kicker">O que sua unidade declara</p>
+    <h2 class="sec">Os termos</h2>
+    <ul class="decls">
+      <li><b>Cooperar para a criação do CONECI-PR</b>, participando de reuniões, encontros, grupos de trabalho e ações voltadas à sua estruturação e implantação.</li>
+      <li><b>Compartilhar informações, experiências e boas práticas</b> de controle interno, auditoria, gestão de riscos, transparência, integridade e ouvidoria.</li>
+      <li><b>Atuar de forma articulada e colaborativa</b>, respeitadas as competências legais de cada instituição, pelo fortalecimento do controle interno no Paraná.</li>
+    </ul>
+    <p class="nota">Instrumento de <b>cooperação institucional</b>: a adesão não gera obrigação contratual ou financeira — é o marco de entrada no esforço conjunto. Iniciativa articulada pela Controladoria-Geral e Ouvidoria do Município de Londrina.</p>
+  </section>
+
+  <section class="card" id="formcard">
+    <p class="kicker">Sua adesão</p>
+    <h2 class="sec">Identifique a unidade de controle</h2>
+
+    <div class="field">
+      <label>Poder <span class="req">*</span></label>
+      <div class="seg" id="poder">
+        <button type="button" data-v="Executivo Municipal" aria-pressed="false">Executivo Municipal</button>
+        <button type="button" data-v="Legislativo Municipal" aria-pressed="false">Legislativo Municipal</button>
+      </div>
+    </div>
+
+    <div class="row two">
+      <div class="field"><label for="mun">Município <span class="req">*</span></label><input id="mun" autocomplete="off" placeholder="Ex.: Londrina"></div>
+      <div class="field"><label for="org">Órgão / UCCI <span class="req">*</span></label><input id="org" autocomplete="off" placeholder="Ex.: Controladoria-Geral do Município"></div>
+    </div>
+    <div class="row two">
+      <div class="field"><label for="tit">Titular do controle interno <span class="req">*</span></label><input id="tit" autocomplete="name" placeholder="Nome completo"></div>
+      <div class="field"><label for="cargo">Cargo</label><input id="cargo" autocomplete="off" placeholder="Ex.: Controlador e Ouvidor"></div>
+    </div>
+    <div class="row two">
+      <div class="field"><label for="mail">E-mail institucional <span class="req">*</span></label><input id="mail" type="email" autocomplete="email" placeholder="nome@municipio.pr.gov.br"></div>
+      <div class="field"><label for="fone">Telefone / WhatsApp</label><input id="fone" type="tel" autocomplete="tel" placeholder="(43) 90000-0000"></div>
+    </div>
+
+    <!-- EQUIPE FUNDADORA -->
+    <div class="founder" id="founder">
+      <div class="top" id="founderToggle" role="button" tabindex="0" aria-pressed="false">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div>
+          <p class="tt">Quero construir o CONECI-PR desde o início</p>
+          <p class="ds">Integrar a equipe fundadora e participar dos grupos de trabalho que vão estruturar o Conselho — estatuto, mobilização, eventos e mais.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="rl">Em quais frentes sua unidade pode contribuir? (toque nas que fizerem sentido)</p>
+        <div class="chips" id="chips">
+          <button type="button" data-v="Estatuto e jurídico" aria-pressed="false">Estatuto e jurídico</button>
+          <button type="button" data-v="Mobilização regional" aria-pressed="false">Mobilização regional</button>
+          <button type="button" data-v="Comunicação e marketing" aria-pressed="false">Comunicação e marketing</button>
+          <button type="button" data-v="Eventos e capacitação" aria-pressed="false">Eventos e capacitação</button>
+          <button type="button" data-v="TI e site" aria-pressed="false">TI e site</button>
+          <button type="button" data-v="Financeiro e contábil" aria-pressed="false">Financeiro e contábil</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMO ao vivo -->
+    <div class="termo" aria-live="polite">
+      <p class="tt">Termo de Adesão</p>
+      <p class="body">A unidade de controle interno abaixo manifesta sua adesão ao Protocolo de Intenções nº 001/2026 e ao esforço de criação do <b>CONECI-PR</b>.</p>
+      <dl>
+        <dt>Município</dt><dd id="p-mun"></dd>
+        <dt>Poder</dt><dd id="p-pod"></dd>
+        <dt>Órgão/UCCI</dt><dd id="p-org"></dd>
+        <dt>Titular</dt><dd id="p-tit"></dd>
+        <dt>Cargo</dt><dd id="p-cargo"></dd>
+        <dt>E-mail</dt><dd id="p-mail"></dd>
+        <dt>Participação</dt><dd id="p-part" class="f"></dd>
+      </dl>
+      <div class="stamp" id="stamp">Aderido ·<br>CONECI-PR</div>
+    </div>
+  </section>
+
+  <!-- SUCESSO -->
+  <section class="card ok" id="ok">
+    <div class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h3 id="okTitle">Adesão registrada!</h3>
+    <p id="okMsg">Obrigado. A adesão da sua unidade foi enviada à coordenação do CONECI-PR em Londrina.</p>
+    <div class="actions-in">
+      <a class="btn zap" id="okAvisar" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Z"/></svg>Avisar a coordenação no WhatsApp</a>
+      <a class="btn ghost" id="okConvidar" href="#">Convidar outro município</a>
+    </div>
+  </section>
+
+  <footer>CONECI-PR · Protocolo de Intenções nº 001/2026 — versão digital.<br>Iniciativa articulada pela Controladoria-Geral e Ouvidoria de Londrina/PR.</footer>
+</div>
+
+<div class="actions" id="actionBar">
+  <div class="actions-in">
+    <a class="btn primary" id="aderir" href="#">Aderir ao protocolo</a>
+    <a class="btn ghost" id="compartilhar" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5 15.4 17.5M15.4 6.5 8.6 10.5"/></svg>
+      Convidar outro município
+    </a>
+    <p class="hint" id="hint">Sua adesão é gravada em segurança. Leva 20 segundos.</p>
+  </div>
+</div>
+
+<script>
+/* ================= CONFIG — EDITE ANTES DE PUBLICAR (veja o README) ================= */
+// 1) URL de envio do seu Google Forms (termina em /formResponse):
+const GFORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScIacDyR-fWJFHq-t2AzbLXL4cFhnJ5Bhm3hUSEaEvBZSMi9Q/formResponse";
+// 2) IDs "entry.XXXX" de cada campo do seu formulário (peça o link pré-preenchido — README):
+const GFORM_ENTRIES = {
+  municipio: "entry.494130577",
+  poder:     "entry.1522316948",
+  orgao:     "entry.1834772231",
+  titular:   "entry.1169917591",
+  cargo:     "entry.1118777625",
+  email:     "entry.504365550",
+  telefone:  "entry.1277890584",
+  fundador:  "entry.1781756707",  // recebe "Sim"/"Não"
+  areas:     "entry.217731288"    // recebe as frentes separadas por vírgula
+};
+// 3) WhatsApp da coordenação (55 + DDD + número, só dígitos) e link público desta página:
+const WHATSAPP_COORDENACAO = "5543900000000";
+const LINK_DESTA_PAGINA    = "https://SEU-LINK-AQUI";
+/* =================================================================================== */
+
+const $ = id => document.getElementById(id);
+const campos = {mun:$("mun"),org:$("org"),tit:$("tit"),cargo:$("cargo"),mail:$("mail"),fone:$("fone")};
+let poder="", fundador=false;
+const areas = new Set();
+
+// Poder
+$("poder").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+  poder=b.dataset.v;
+  $("poder").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  sync();
+}));
+
+// Equipe fundadora (toggle)
+function toggleFounder(){
+  fundador=!fundador;
+  $("founder").classList.toggle("on",fundador);
+  $("founderToggle").setAttribute("aria-pressed",fundador);
+  $("aderir").classList.toggle("founder-mode",fundador);
+  $("aderir").textContent = fundador ? "Aderir e integrar a equipe fundadora" : "Aderir ao protocolo";
+  sync();
+}
+$("founderToggle").addEventListener("click",toggleFounder);
+$("founderToggle").addEventListener("keydown",e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();toggleFounder();}});
+
+// Frentes (chips)
+$("chips").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+  const v=b.dataset.v, on=b.getAttribute("aria-pressed")==="true";
+  b.setAttribute("aria-pressed",!on); on?areas.delete(v):areas.add(v); sync();
+}));
+
+// Preview ao vivo
+function sync(){
+  $("p-mun").textContent=campos.mun.value.trim();
+  $("p-pod").textContent=poder;
+  $("p-org").textContent=campos.org.value.trim();
+  $("p-tit").textContent=campos.tit.value.trim();
+  $("p-cargo").textContent=campos.cargo.value.trim();
+  $("p-mail").textContent=campos.mail.value.trim();
+  $("p-part").textContent = fundador
+    ? "Equipe fundadora" + (areas.size?` — ${[...areas].join(", ")}`:"")
+    : "Adesão ao protocolo";
+}
+Object.values(campos).forEach(el=>el.addEventListener("input",sync));
+sync();
+
+// Validação
+function valida(){
+  let ok=true;
+  [campos.mun,campos.org,campos.tit,campos.mail].forEach(el=>{const bad=!el.value.trim();el.classList.toggle("err",bad);if(bad)ok=false;});
+  const semPoder=!poder;
+  $("poder").querySelectorAll("button").forEach(b=>b.style.borderColor=semPoder?"#C0492B":"");
+  if(semPoder)ok=false;
+  return ok;
+}
+
+// Dados -> params do Google Forms
+function montarParams(){
+  const d={
+    municipio:campos.mun.value.trim(), poder, orgao:campos.org.value.trim(),
+    titular:campos.tit.value.trim(), cargo:campos.cargo.value.trim(),
+    email:campos.mail.value.trim(), telefone:campos.fone.value.trim(),
+    fundador:fundador?"Sim":"Não", areas:[...areas].join(", ")
+  };
+  const p=new URLSearchParams();
+  for(const k in GFORM_ENTRIES){ if(d[k]) p.append(GFORM_ENTRIES[k], d[k]); }
+  return p;
+}
+const configurado = !GFORM_ACTION.includes("COLE_SEU_ID_AQUI");
+
+// Texto para WhatsApp (aviso à coordenação)
+function textoWhats(){
+  return(`*ADESÃO — Protocolo de Intenções 001/2026 (CONECI-PR)*\n`+
+  `*Município:* ${campos.mun.value.trim()}\n*Poder:* ${poder}\n*Órgão/UCCI:* ${campos.org.value.trim()}\n`+
+  `*Titular:* ${campos.tit.value.trim()}\n*Cargo:* ${campos.cargo.value.trim()||"—"}\n*E-mail:* ${campos.mail.value.trim()}\n`+
+  `*Telefone:* ${campos.fone.value.trim()||"—"}\n*Participação:* ${fundador?"Equipe fundadora"+(areas.size?` (${[...areas].join(", ")})`:""):"Adesão ao protocolo"}`);
+}
+
+// Tela de sucesso
+function sucesso(){
+  $("stamp").classList.add("on");
+  setTimeout(()=>{
+    $("formcard").style.display="none";
+    $("actionBar").style.display="none";
+    $("ok").classList.add("show");
+    $("okTitle").textContent = fundador ? "Bem-vindo à equipe fundadora!" : "Adesão registrada!";
+    $("okMsg").textContent = fundador
+      ? "Sua unidade entrou como fundadora do CONECI-PR. A coordenação em Londrina vai te chamar para os grupos de trabalho."
+      : "Obrigado. A adesão da sua unidade foi enviada à coordenação do CONECI-PR em Londrina.";
+    $("okAvisar").href=`https://wa.me/${WHATSAPP_COORDENACAO}?text=${encodeURIComponent(textoWhats())}`;
+    $("ok").scrollIntoView({behavior:"smooth",block:"center"});
+  },450);
+}
+
+// ADERIR -> grava no Google Forms (silencioso) com fallback
+$("aderir").addEventListener("click",async e=>{
+  e.preventDefault();
+  if(!valida()){
+    $("hint").textContent="Preencha os campos obrigatórios (*) para aderir.";
+    (document.querySelector(".err")||$("poder")).scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  const params=montarParams();
+  if(!configurado){ // ainda em configuração: cai para o WhatsApp para não perder a adesão
+    window.open(`https://wa.me/${WHATSAPP_COORDENACAO}?text=${encodeURIComponent(textoWhats())}`,"_blank");
+    sucesso(); return;
+  }
+  $("aderir").textContent="Enviando…";
+  try{
+    await fetch(GFORM_ACTION,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:params.toString()});
+    sucesso();
+  }catch(_){ // fallback: abre o formulário pré-preenchido para confirmar manualmente
+    const vf=GFORM_ACTION.replace("/formResponse","/viewform")+"?usp=pp_url&"+params.toString();
+    window.open(vf,"_blank"); sucesso();
+  }
+});
+
+// Compartilhar / convidar
+async function convidar(){
+  const msg=`📋 *Protocolo de Intenções — CONECI-PR*\nSua unidade de controle interno pode aderir à criação do Conselho Estadual de Controle Interno do Paraná. Leia e adira aqui:\n${LINK_DESTA_PAGINA}`;
+  if(navigator.share){try{await navigator.share({title:"Protocolo de Intenções · CONECI-PR",text:msg,url:LINK_DESTA_PAGINA});return;}catch(_){}}
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,"_blank");
+}
+$("compartilhar").addEventListener("click",e=>{e.preventDefault();convidar();});
+$("okConvidar").addEventListener("click",e=>{e.preventDefault();convidar();});
+</script>
