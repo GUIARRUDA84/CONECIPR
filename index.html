@@ -372,19 +372,34 @@ $("aderir").addEventListener("click",async e=>{
     sucesso(); return;
   }
   $("aderir").textContent="Enviando…";
-  try{
-    await fetch(GFORM_ACTION,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:params.toString()});
-    sucesso();
-  }catch(_){ // fallback: abre o formulário pré-preenchido para confirmar manualmente
-    const vf=GFORM_ACTION.replace("/formResponse","/viewform")+"?usp=pp_url&"+params.toString();
-    window.open(vf,"_blank"); sucesso();
-  }
+  await enviarGForm(params);
+  sucesso();
 });
+
+// Envio confiável ao Google Forms: form real submetido para um iframe oculto
+function enviarGForm(params){
+  return new Promise(resolve=>{
+    let sink=document.getElementById("gform_sink");
+    if(!sink){
+      sink=document.createElement("iframe");
+      sink.name="gform_sink"; sink.id="gform_sink"; sink.style.display="none";
+      document.body.appendChild(sink);
+    }
+    const form=document.createElement("form");
+    form.action=GFORM_ACTION; form.method="POST"; form.target="gform_sink";
+    params.forEach((v,k)=>{ const i=document.createElement("input"); i.type="hidden"; i.name=k; i.value=v; form.appendChild(i); });
+    document.body.appendChild(form);
+    let done=false; const finish=()=>{ if(done)return; done=true; try{form.remove();}catch(_){}; resolve(); };
+    sink.addEventListener("load",finish,{once:true});
+    form.submit();
+    setTimeout(finish,2000); // resolve mesmo que o load não dispare
+  });
+}
 
 // Compartilhar / convidar
 async function convidar(){
-  const msg=`📋 *Protocolo de Intenções — CONECI-PR*\nSua unidade de controle interno pode aderir à criação do Conselho Estadual de Controle Interno do Paraná. Leia e adira aqui:\n${LINK_DESTA_PAGINA}`;
-  if(navigator.share){try{await navigator.share({title:"Protocolo de Intenções · CONECI-PR",text:msg,url:LINK_DESTA_PAGINA});return;}catch(_){}}
+  const msg=`*Protocolo de Intenções — CONECI-PR*\n\nSua unidade de controle interno pode participar da criação do Conselho Estadual de Controle Interno do Paraná.\n\nAcesse e faça a adesão:\n${LINK_DESTA_PAGINA}`;
+  if(navigator.share){try{await navigator.share({title:"Protocolo de Intenções · CONECI-PR",text:msg});return;}catch(_){}}
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,"_blank");
 }
 $("compartilhar").addEventListener("click",e=>{e.preventDefault();convidar();});
