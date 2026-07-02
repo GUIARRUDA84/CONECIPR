@@ -40,6 +40,10 @@
   .hero p.sub{margin:8px auto 0;max-width:44ch;font-size:.92rem;color:#CFE3F2}
   .selo{display:inline-block;margin-top:16px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.12);
     border:1px solid rgba(255,255,255,.22);font-size:.78rem;font-weight:600;letter-spacing:.04em}
+  .hero-wa{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 18px;border-radius:999px;
+    background:#25D366;color:#06301A;font-weight:700;font-size:.9rem;text-decoration:none;transition:filter .15s,transform .08s}
+  .hero-wa:hover{filter:brightness(1.05)} .hero-wa:active{transform:translateY(1px)}
+  .hero-wa svg{width:18px;height:18px}
 
   .card{background:var(--card);border:1px solid var(--linha);border-radius:var(--r);box-shadow:var(--sombra);padding:22px 20px;margin-top:18px}
   .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--azul);font-weight:700;margin:0 0 6px}
@@ -128,6 +132,10 @@
   <h1>Protocolo de Intenções nº 001/2026</h1>
   <p class="sub">Um pacto de cooperação para criar o Conselho Estadual de Controle Interno do Paraná.</p>
   <span class="selo">Adesão voluntária · sem custo · sem anuidade em 2026–2027</span>
+  <div><a class="hero-wa" id="falarCoord" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm5.5 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.7-.1-.4-.1-1-.3-1.6-.6-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6 0l.9-1c.2-.2.4-.2.6-.1l1.9.9c.3.2.5.2.5.4.1.1.1.7-.1 1.3Z"/></svg>
+    Falar com a coordenação
+  </a></div>
 </div>
 
 <div class="wrap">
@@ -250,7 +258,7 @@ const GFORM_ENTRIES = {
 };
 // 3) WhatsApp da coordenação (55 + DDD + número, só dígitos) e link público desta página:
 const WHATSAPP_COORDENACAO = "5541996447547";
-const LINK_DESTA_PAGINA    = "https://guiarruda84.github.io/CONECIPR/";
+const LINK_DESTA_PAGINA    = "https://conecipr.vercel.app";
 /* =================================================================================== */
 
 const $ = id => document.getElementById(id);
@@ -321,6 +329,10 @@ function montarParams(){
   return p;
 }
 const configurado = !GFORM_ACTION.includes("COLE_SEU_ID_AQUI");
+
+// Botão "Falar com a coordenação" (hero)
+$("falarCoord").href = `https://wa.me/${WHATSAPP_COORDENACAO}?text=`+
+  encodeURIComponent("Olá! Gostaria de falar sobre o Protocolo de Intenções do CONECI-PR e a adesão da minha unidade de controle interno.");
 
 // Texto para WhatsApp (aviso à coordenação)
 function textoWhats(){
